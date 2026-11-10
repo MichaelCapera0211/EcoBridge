@@ -12,9 +12,9 @@
 --------------------------------------------------------------*/
 /* Fonts */
 :root {
-  --default-font: "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --heading-font: "Raleway",  sans-serif;
-  --nav-font: "Poppins",  sans-serif;
+  --default-font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --heading-font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --nav-font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
 }
 
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
@@ -22,7 +22,7 @@
   --background-color: #ffffff; /* Background color for the entire website, including individual sections */
   --default-color: #555555; /* Default color used for the majority of the text content across the entire website */
   --heading-color: #222222; /* Color for headings, subheadings and title throughout the website */
-  --accent-color: #5cb874; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+  --accent-color: #2a8049; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
   --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
   --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
 }
@@ -30,17 +30,17 @@
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
 :root {
   --nav-color: #555555;  /* The default color of the main navmenu links */
-  --nav-hover-color: #5cb874; /* Applied to main navmenu links when they are hovered over or active */
+  --nav-hover-color: #2a8049; /* Applied to main navmenu links when they are hovered over or active */
   --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
   --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
   --nav-dropdown-color: #555555; /* Used for navigation links of the dropdown items in the navigation menu. */
-  --nav-dropdown-hover-color: #5cb874; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+  --nav-dropdown-hover-color: #2a8049; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
 }
 
 /* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
 
 .light-background {
-  --background-color: #f9fcf9;
+  --background-color: #f2f8f3;
   --surface-color: #ffffff;
 }
 
@@ -53,10 +53,10 @@
 }
 
 .accent-background {
-  --background-color: #5cb874;
+  --background-color: #2a8049;
   --default-color: #ffffff;
   --heading-color: #ffffff;
-  --surface-color: #80c792;
+  --surface-color: #3c9a5c;
 }
 
 /* Smooth scroll */
@@ -68,6 +68,8 @@
 # General Styling & Shared Classes
 --------------------------------------------------------------*/
 body {
+  font-size: 17px;
+  line-height: 1.7;
   color: var(--default-color);
   background-color: var(--background-color);
   font-family: var(--default-font);
@@ -1345,6 +1347,20 @@ section,
   z-index: 1;
 }
 
+/* Same size for every card image, regardless of the original proportions */
+.portfolio .portfolio-content .portfolio-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.portfolio .portfolio-content > a {
+  display: block;
+  overflow: hidden;
+}
+
 .portfolio .portfolio-content .portfolio-info {
   background-color: var(--background-color);
   border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
@@ -1377,6 +1393,54 @@ section,
 
 .portfolio .portfolio-content:hover img {
   transform: scale(1.1);
+}
+
+/* Extra content inside each Platform Features card */
+.portfolio .portfolio-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio .portfolio-content .portfolio-info {
+  flex: 1;
+}
+
+.portfolio .portfolio-content .portfolio-info h4,
+.portfolio .portfolio-content .portfolio-info p {
+  padding-right: 0;
+}
+
+.portfolio .portfolio-tag {
+  display: inline-block;
+  background-color: color-mix(in srgb, var(--accent-color), transparent 88%);
+  color: var(--accent-color);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 50px;
+  margin-bottom: 12px;
+}
+
+.portfolio .portfolio-tag i {
+  margin-right: 4px;
+}
+
+.portfolio .portfolio-points {
+  list-style: none;
+  margin: 15px 0 0 0;
+  padding: 15px 0 0 0;
+  border-top: 1px dashed color-mix(in srgb, var(--default-color), transparent 80%);
+}
+
+.portfolio .portfolio-points li {
+  font-size: 13px;
+  padding: 3px 0;
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
+}
+
+.portfolio .portfolio-points li i {
+  color: var(--accent-color);
+  margin-right: 6px;
 }
 
 /*--------------------------------------------------------------
@@ -1851,3 +1915,189 @@ section,
 .starter-section {
   /* Add your styles here */
 }
+
+/*--------------------------------------------------------------
+# Accessibility & low-bandwidth improvements
+--------------------------------------------------------------*/
+html { font-size: 100%; }
+html.text-lg { font-size: 112.5%; }
+html.text-xl { font-size: 125%; }
+html.text-sm { font-size: 93%; }
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  background: #1d5c35;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 6px;
+  z-index: 100000;
+  transition: top 0.2s;
+}
+.skip-link:focus { top: 12px; color: #fff; }
+
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, .filter-active:focus-visible, [tabindex]:focus-visible {
+  outline: 3px solid #f2b705;
+  outline-offset: 3px;
+}
+
+.header .logo img { max-height: 40px; margin-right: 8px; }
+
+/* Hero: darker green overlay so white text is easy to read */
+.hero .carousel-item:before { background: rgba(12, 50, 28, 0.68); }
+.hero .carousel-container h2 { text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35); }
+.hero .carousel-container p { font-size: 18px; max-width: 700px; }
+.hero .btn-get-started { background: #2a8049; border-color: #fff; margin: 4px 6px; }
+.hero .btn-get-started:hover { background: #fff; color: #1d5c35; border-color: #fff; }
+.hero .btn-get-started.btn-outline { background: transparent; }
+.hero .btn-get-started.btn-outline:hover { background: #fff; color: #1d5c35; }
+
+/* About quick facts */
+.about .quick-facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+.about .quick-facts span {
+  background: color-mix(in srgb, var(--accent-color), transparent 90%);
+  color: #1d5c35;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 8px 14px;
+  border-radius: 50px;
+}
+.about .quick-facts i { color: var(--accent-color); margin-right: 6px; }
+
+/* Why Us: icon next to the number */
+.why-us .card span i { margin-right: 6px; font-size: 26px; vertical-align: -3px; }
+
+/* How It Works */
+.how-it-works .step-card {
+  background: var(--surface-color);
+  border-radius: 14px;
+  padding: 36px 28px;
+  height: 100%;
+  text-align: center;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.07);
+  border-top: 5px solid var(--accent-color);
+}
+.how-it-works .step-icon {
+  width: 76px; height: 76px; margin: 0 auto 18px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent-color), transparent 88%);
+  color: var(--accent-color);
+  font-size: 34px;
+}
+.how-it-works .step-card h3 { font-size: 22px; font-weight: 700; }
+.how-it-works .step-card h3 span {
+  display: inline-block; width: 30px; height: 30px; line-height: 30px;
+  border-radius: 50%; background: var(--accent-color); color: #fff;
+  font-size: 15px; margin-right: 8px; vertical-align: 2px;
+}
+.how-it-works .step-card p { margin: 0; }
+
+/* Accessibility toolbar */
+.a11y-toolbar {
+  position: fixed; left: 14px; bottom: 14px; z-index: 9990;
+  display: flex; gap: 6px; padding: 6px;
+  background: #fff; border-radius: 50px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+}
+.a11y-toolbar button {
+  width: 42px; height: 42px; border: 0; border-radius: 50%;
+  background: var(--accent-color); color: #fff; font-size: 18px; cursor: pointer;
+}
+.a11y-toolbar button:hover { background: #1d5c35; }
+.a11y-toolbar button[aria-pressed="true"] { background: #111; }
+
+/* High contrast mode */
+html.high-contrast body { background: #000; color: #fff; }
+html.high-contrast :is(.light-background, .section, .header, .footer, .portfolio-info, .portfolio-content, .service-item, .step-card, .card, .member, .info-item, .info-wrap) {
+  --background-color: #000; --surface-color: #000; --default-color: #fff; --heading-color: #ffe14d;
+  background-color: #000;
+}
+html.high-contrast a { color: #7fd1ff; }
+html.high-contrast .accent-background, html.high-contrast .hero .btn-get-started, html.high-contrast .cta-btn { background: #000; border: 2px solid #ffe14d; color: #ffe14d; }
+html.high-contrast .portfolio-tag, html.high-contrast .quick-facts span { background: #222; color: #ffe14d; }
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  :root { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  [data-aos] { opacity: 1 !important; transform: none !important; }
+}
+
+@media (max-width: 575px) {
+  .hero .carousel-container p { font-size: 16px; }
+  .a11y-toolbar button { width: 38px; height: 38px; }
+}
+
+/*--------------------------------------------------------------
+# Detail pages (features and services)
+--------------------------------------------------------------*/
+.portfolio .portfolio-more { display: inline-block; margin-top: 14px; font-weight: 600; font-size: 14px; }
+.portfolio .portfolio-more i { transition: transform 0.2s; }
+.portfolio .portfolio-more:hover i { transform: translateX(4px); }
+
+.details-page .detail-h2 { font-size: 26px; font-weight: 700; margin: 32px 0 14px; }
+.details-page .detail-h2:first-child { margin-top: 0; }
+.details-page p { font-size: 17px; }
+
+.details-page .detail-figure { margin: 0 0 8px; border-radius: 14px; overflow: hidden; box-shadow: 0 8px 28px rgba(0,0,0,0.12); background: #eef5ef; }
+.details-page .detail-figure img { width: 100%; height: auto; max-height: 440px; object-fit: cover; display: block; }
+
+.details-page .detail-hero-icon { width: 96px; height: 96px; border-radius: 24px; display: flex; align-items: center; justify-content: center; font-size: 46px; color: #fff; margin-bottom: 22px; background: var(--accent-color); }
+.details-page .detail-cyan { background: #0891b2; } .details-page .detail-orange { background: #c2570c; }
+.details-page .detail-teal { background: #0f766e; } .details-page .detail-red { background: #c0392b; }
+.details-page .detail-indigo { background: #4f46e5; } .details-page .detail-pink { background: #be185d; }
+
+.details-page .detail-card { display: flex; gap: 14px; align-items: flex-start; height: 100%; padding: 18px; background: #fff; border-radius: 12px; border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 4px 16px rgba(0,0,0,0.05); }
+.details-page .detail-card > i { flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 21px; background: color-mix(in srgb, var(--accent-color), transparent 88%); color: var(--accent-color); }
+.details-page .detail-card h4 { font-size: 17px; font-weight: 700; margin: 0 0 4px; }
+.details-page .detail-card p { font-size: 15px; margin: 0; }
+.details-page .detail-card-col { flex-direction: column; align-items: center; text-align: center; }
+
+.details-page .detail-steps { list-style: none; counter-reset: step; padding: 0; margin: 0; }
+.details-page .detail-steps li { counter-increment: step; position: relative; padding: 4px 0 18px 56px; font-size: 17px; }
+.details-page .detail-steps li::before { content: counter(step); position: absolute; left: 0; top: 0; width: 38px; height: 38px; border-radius: 50%; background: var(--accent-color); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+
+.details-page .detail-checks { list-style: none; padding: 0; margin: 0; }
+.details-page .detail-checks li { padding: 6px 0; font-size: 17px; }
+.details-page .detail-checks i { color: var(--accent-color); margin-right: 8px; }
+
+.details-page .detail-tip { display: flex; gap: 14px; margin: 32px 0; padding: 20px; border-radius: 12px; background: #fff8e1; border-left: 6px solid #f2b705; color: #4a3b00; }
+.details-page .detail-tip > i { font-size: 28px; color: #b78600; }
+.details-page .detail-tip p { margin: 2px 0 0; color: #4a3b00; }
+
+.details-page .detail-cta { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; padding: 24px; border-radius: 14px; background: var(--accent-color); color: #fff; }
+.details-page .detail-cta h3 { color: #fff; font-size: 22px; margin: 0 0 4px; }
+.details-page .detail-cta p { color: #fff; margin: 0; }
+
+.btn-detail { display: inline-block; background: #fff; color: #1d5c35; font-weight: 700; padding: 12px 26px; border-radius: 50px; border: 2px solid #fff; }
+.btn-detail:hover { background: transparent; color: #fff; }
+.details-page .detail-side .btn-detail { background: var(--accent-color); color: #fff; border-color: var(--accent-color); }
+.details-page .detail-side .btn-detail:hover { background: transparent; color: var(--accent-color); }
+.btn-detail.btn-block { display: block; text-align: center; margin-top: 18px; }
+
+.details-page .detail-nav { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 28px; font-weight: 600; }
+
+.details-page .detail-side { background: #fff; border-radius: 14px; padding: 26px; box-shadow: 0 8px 28px rgba(0,0,0,0.08); position: sticky; top: 130px; }
+.details-page .detail-side h3 { font-size: 20px; font-weight: 700; padding-bottom: 12px; margin-bottom: 14px; border-bottom: 1px solid rgba(0,0,0,0.1); }
+.details-page .detail-info, .details-page .detail-links { list-style: none; padding: 0; margin: 0; }
+.details-page .detail-info li { padding: 8px 0; font-size: 15px; border-bottom: 1px dashed rgba(0,0,0,0.1); }
+.details-page .detail-info strong { display: block; font-size: 13px; text-transform: uppercase; letter-spacing: 0.4px; color: var(--accent-color); }
+.details-page .detail-links li { padding: 7px 0; }
+.details-page .detail-links i { margin-right: 8px; }
+
+.details-page .related-item { display: flex; align-items: center; gap: 12px; padding: 8px 0; color: var(--heading-color); }
+.details-page .related-item img { width: 60px; height: 60px; object-fit: cover; border-radius: 10px; }
+.details-page .related-item small { display: block; color: var(--accent-color); font-weight: 600; }
+.details-page .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; }
+.details-page .related-grid .related-item { background: #fff; padding: 10px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.08); }
+
+.detail-tag { display: inline-block; background: color-mix(in srgb, var(--accent-color), transparent 88%); color: var(--accent-color); font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 50px; }
+
+html.high-contrast .details-page :is(.detail-card, .detail-side, .related-grid .related-item) { background: #000; border-color: #ffe14d; }
+html.high-contrast .details-page .detail-tip { background: #000; border: 2px solid #ffe14d; color: #fff; }
+html.high-contrast .details-page .detail-tip p { color: #fff; }
+html.high-contrast .details-page .detail-cta { background: #000; border: 2px solid #ffe14d; }
+
+@media (max-width: 991px) { .details-page .detail-side { position: static; } }
