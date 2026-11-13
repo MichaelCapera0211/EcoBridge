@@ -1,8 +1,8 @@
 /* EcoBridge service worker: lets the site open without internet after the first visit */
-const CACHE = 'ecobridge-v2';
+const CACHE = 'ecobridge-v3';
 const CORE = [
   'index.html', 'portfolio-details.html', 'service-details.html',
-  'assets/css/main.css', 'assets/js/main.js', 'assets/js/accessibility.js', 'assets/js/details-data.js', 'assets/js/details.js',
+  'assets/css/main.css', 'assets/js/main.js', 'assets/js/accessibility.js', 'assets/js/contact.js', 'assets/js/details-data.js', 'assets/js/details.js',
   'assets/vendor/bootstrap/css/bootstrap.min.css',
   'assets/vendor/bootstrap/js/bootstrap.bundle.min.js',
   'assets/vendor/bootstrap-icons/bootstrap-icons.css',
@@ -10,7 +10,6 @@ const CORE = [
   'assets/vendor/aos/aos.css', 'assets/vendor/aos/aos.js',
   'assets/vendor/glightbox/css/glightbox.min.css', 'assets/vendor/glightbox/js/glightbox.min.js',
   'assets/vendor/imagesloaded/imagesloaded.pkgd.min.js', 'assets/vendor/isotope-layout/isotope.pkgd.min.js',
-  'assets/vendor/php-email-form/validate.js',
   'assets/img/logo.png', 'assets/img/logo-wordmark.png', 'assets/img/favicon.png', 'assets/img/team/michael.jpg'
 ];
 
