@@ -1,5 +1,5 @@
 /* EcoBridge service worker: lets the site open without internet after the first visit */
-const CACHE = 'ecobridge-v1';
+const CACHE = 'ecobridge-v2';
 const CORE = [
   'index.html', 'portfolio-details.html', 'service-details.html',
   'assets/css/main.css', 'assets/js/main.js', 'assets/js/accessibility.js', 'assets/js/details-data.js', 'assets/js/details.js',
@@ -11,7 +11,7 @@ const CORE = [
   'assets/vendor/glightbox/css/glightbox.min.css', 'assets/vendor/glightbox/js/glightbox.min.js',
   'assets/vendor/imagesloaded/imagesloaded.pkgd.min.js', 'assets/vendor/isotope-layout/isotope.pkgd.min.js',
   'assets/vendor/php-email-form/validate.js',
-  'assets/img/logo.png', 'assets/img/favicon.png'
+  'assets/img/logo.png', 'assets/img/logo-wordmark.png', 'assets/img/favicon.png', 'assets/img/team/michael.jpg'
 ];
 
 self.addEventListener('install', (e) => {
@@ -24,14 +24,20 @@ self.addEventListener('activate', (e) => {
   self.clients.claim();
 });
 
+/* Stale-while-revalidate: opens instantly from the saved copy (good for slow or no internet)
+   and quietly downloads the newest version, so after you publish an update visitors get it on their next visit. */
 self.addEventListener('fetch', (e) => {
   const req = e.request;
   if (req.method !== 'GET' || new URL(req.url).origin !== location.origin) return;
   e.respondWith(
-    caches.match(req).then((hit) => hit || fetch(req).then((res) => {
-      const copy = res.clone();
-      caches.open(CACHE).then((c) => c.put(req, copy));
-      return res;
-    }).catch(() => caches.match('index.html')))
+    caches.open(CACHE).then((cache) =>
+      cache.match(req).then((cached) => {
+        const fresh = fetch(req).then((res) => {
+          if (res && res.ok) cache.put(req, res.clone());
+          return res;
+        }).catch(() => cached || cache.match('index.html'));
+        return cached || fresh;
+      })
+    )
   );
 });

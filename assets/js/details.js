@@ -20,6 +20,19 @@
     return '<div class="detail-cta"><div><h3>Have questions?</h3><p>' + esc(text) + '</p></div><a class="btn-detail" href="index.html#contact">Contact us</a></div>';
   }
 
+  function externalLinks(f) {
+    if (!f.links || !f.links.length) return '';
+    return '<h2 class="detail-h2">' + esc(f.linksTitle || 'Explore and interact') + '</h2>' +
+      '<div class="ext-links">' + f.links.map(function (l) {
+        return '<a class="ext-link" href="' + esc(l.url) + '" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">' +
+          '<span class="ext-type">' + esc(l.type) + '</span>' +
+          '<strong>' + esc(l.title) + ' <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i><span class="visually-hidden"> (opens in a new tab)</span></strong>' +
+          '<span class="ext-desc">' + esc(l.desc) + '</span>' +
+          '<small>' + esc(l.source) + '</small></a>';
+      }).join('') + '</div>' +
+      '<p class="ext-note"><i class="bi bi-shield-check"></i> We only link to trusted organizations. These links open on other websites and need an internet connection.</p>';
+  }
+
   function featureHTML(f) {
     var i = F.indexOf(f), prev = F[(i + F.length - 1) % F.length], next = F[(i + 1) % F.length];
     return '<div class="row gy-4 justify-content-between">' +
@@ -30,7 +43,7 @@
           f.features.map(function (x) { return '<div class="col-md-6"><div class="detail-card"><i class="bi ' + x[0] + '"></i><div><h4>' + esc(x[1]) + '</h4><p>' + esc(x[2]) + '</p></div></div></div>'; }).join('') +
         '</div>' +
         '<h2 class="detail-h2">How to use it</h2><ol class="detail-steps">' + f.steps.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('') + '</ol>' +
-        tipBox(f.tip) + contactCta('Tell us what you think of this feature or how we can improve it.') +
+        externalLinks(f) + tipBox(f.tip) + contactCta('Tell us what you think of this feature or how we can improve it.') +
         '<div class="detail-nav"><a href="portfolio-details.html?id=' + prev.id + '"><i class="bi bi-arrow-left"></i> ' + esc(prev.title) + '</a>' +
         '<a href="portfolio-details.html?id=' + next.id + '">' + esc(next.title) + ' <i class="bi bi-arrow-right"></i></a></div>' +
       '</div>' +

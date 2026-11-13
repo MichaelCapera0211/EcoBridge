@@ -2101,3 +2101,25 @@ html.high-contrast .details-page .detail-tip p { color: #fff; }
 html.high-contrast .details-page .detail-cta { background: #000; border: 2px solid #ffe14d; }
 
 @media (max-width: 991px) { .details-page .detail-side { position: static; } }
+
+/* External links on feature pages */
+.details-page .ext-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+.details-page .ext-link { display: flex; flex-direction: column; gap: 6px; padding: 18px; border-radius: 12px; background: #fff; border: 2px solid color-mix(in srgb, var(--accent-color), transparent 70%); color: var(--default-color); transition: 0.2s; }
+.details-page .ext-link:hover { border-color: var(--accent-color); transform: translateY(-3px); box-shadow: 0 8px 22px rgba(0,0,0,0.1); color: var(--default-color); }
+.details-page .ext-link strong { color: var(--heading-color); font-size: 17px; line-height: 1.35; }
+.details-page .ext-link strong i { color: var(--accent-color); font-size: 14px; margin-left: 4px; }
+.details-page .ext-link .ext-type { align-self: flex-start; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; background: color-mix(in srgb, var(--accent-color), transparent 88%); color: #1d5c35; padding: 3px 10px; border-radius: 50px; }
+.details-page .ext-link .ext-desc { font-size: 15px; }
+.details-page .ext-link small { color: color-mix(in srgb, var(--default-color), transparent 25%); font-size: 13px; margin-top: auto; }
+.details-page .ext-note { font-size: 14px; margin-top: 12px; color: color-mix(in srgb, var(--default-color), transparent 15%); }
+.details-page .ext-note i { color: var(--accent-color); margin-right: 4px; }
+html.high-contrast .details-page .ext-link { background: #000; border-color: #ffe14d; }
+html.high-contrast .details-page .ext-link strong { color: #ffe14d; }
+
+/* Logo */
+.header .logo img { height: 46px; width: auto; max-height: none; margin-right: 10px; }
+.footer .footer-logo-badge { display: inline-block; background: #fff; border-radius: 14px; padding: 12px 18px; margin-bottom: 14px; }
+.footer .footer-logo-badge img { display: block; width: 210px; max-width: 100%; height: auto; }
+
+/* Team photos */
+.team .member img { object-fit: cover; }
