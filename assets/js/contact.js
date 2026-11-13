@@ -1,5 +1,6 @@
 /* Contact form: sends the message to the site owner's email through FormSubmit (works on GitHub Pages). */
 (function () {
+  var es = function () { return window.EB_LANG === 'es'; };
   var form = document.getElementById('contact-form');
   if (!form) return;
   var loading = form.querySelector('.loading'), err = form.querySelector('.error-message'), ok = form.querySelector('.sent-message');
@@ -9,7 +10,7 @@
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     if (form.querySelector('[name="_honey"]').value) return;           // bots fill this hidden field
-    if (!navigator.onLine) { show(err, 'You are offline. Please connect to the internet and try again.'); return; }
+    if (!navigator.onLine) { show(err, es() ? 'No tienes conexión. Conéctate a internet e inténtalo de nuevo.' : 'You are offline. Please connect to the internet and try again.'); return; }
     show(loading); btn.disabled = true;
     fetch(form.getAttribute('data-endpoint'), { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
       .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); })
@@ -17,7 +18,7 @@
         if (res.ok && String(res.data.success) === 'true') { show(ok); form.reset(); }
         else { throw new Error((res.data && res.data.message) || 'The message could not be sent.'); }
       })
-      .catch(function () { show(err, 'Sorry, your message could not be sent. Please try again in a moment.'); })
+      .catch(function () { show(err, es() ? 'Lo sentimos, no se pudo enviar tu mensaje. Inténtalo de nuevo en un momento.' : 'Sorry, your message could not be sent. Please try again in a moment.'); })
       .then(function () { btn.disabled = false; });
   });
 })();

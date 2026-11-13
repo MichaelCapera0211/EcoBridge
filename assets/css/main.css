@@ -2123,3 +2123,6 @@ html.high-contrast .details-page .ext-link strong { color: #ffe14d; }
 
 /* Team photos */
 .team .member img { object-fit: cover; }
+
+/* Language toggle (inside the accessibility toolbar) */
+.a11y-toolbar .a11y-lang { font-size: 14px; font-weight: 700; letter-spacing: 0.3px; }

@@ -1,8 +1,8 @@
 /* EcoBridge service worker: lets the site open without internet after the first visit */
-const CACHE = 'ecobridge-v3';
+const CACHE = 'ecobridge-v4';
 const CORE = [
   'index.html', 'portfolio-details.html', 'service-details.html',
-  'assets/css/main.css', 'assets/js/main.js', 'assets/js/accessibility.js', 'assets/js/contact.js', 'assets/js/details-data.js', 'assets/js/details.js',
+  'assets/css/main.css', 'assets/js/main.js', 'assets/js/accessibility.js', 'assets/js/contact.js', 'assets/js/i18n.js', 'assets/js/i18n-es.js', 'assets/js/details-data-es.js', 'assets/js/details-data.js', 'assets/js/details.js',
   'assets/vendor/bootstrap/css/bootstrap.min.css',
   'assets/vendor/bootstrap/js/bootstrap.bundle.min.js',
   'assets/vendor/bootstrap-icons/bootstrap-icons.css',
